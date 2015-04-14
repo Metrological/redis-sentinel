@@ -19,7 +19,6 @@ $ npm install simple-redis-sentinel
     ];
 
     var redisOptions = {
-        debug:true,
         useSlave: true,
         redisConnectOptions: {
             retry_max_delay: 10000
@@ -33,10 +32,10 @@ $ npm install simple-redis-sentinel
     });
 
     redisManager.onMasterChange(function(){
-        console.error('Redis master changed');
+		console.log('new master host', redisManager.getMasterClientById('master').host, redisManager.getMasterClientById('master').port);
     });
 
     redisManager.onSlaveChange(function(){
-        console.error('Redis slave changed');
+        console.log('new slave host', redisManager.getMasterClientById('slave').host, redisManager.getMasterClientById('slave').port);
     });
 ```
