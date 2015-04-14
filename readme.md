@@ -32,10 +32,10 @@ $ npm install simple-redis-sentinel
     });
 
     redisManager.onMasterChange(function(){
-		console.log('new master host', redisManager.getMasterClientById('master').host, redisManager.getMasterClientById('master').port);
+		console.log('new master host', redisManager.getMasterClientById('master').address);
     });
 
     redisManager.onSlaveChange(function(){
-        console.log('new slave host', redisManager.getMasterClientById('slave').host, redisManager.getMasterClientById('slave').port);
+        console.log('new slave host', redisManager.getMasterClientById('slave').address);
     });
 ```

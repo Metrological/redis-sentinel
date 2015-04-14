@@ -311,8 +311,9 @@ Sentinel.prototype.switchRedisConnection = function (client, host, port) {
         return this.log('client allready switched to', host, port);
     }
 
-    client.host = host;
-    client.port = port;
+    client.address = host + ':' + port;
+    client.connectionOption.host = host;
+    client.connectionOption.port = port;
     client.connection_gone("Force refresh connection");
 };
 
