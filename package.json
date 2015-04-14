@@ -8,6 +8,7 @@
     "url": "https://github.com/Metrological/redis-sentinel.git"
   },
   "dependencies": {
+    "async": "^0.9.0",
     "redis": "^0.12.1"
   },
   "license": "MIT",
