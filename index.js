@@ -348,7 +348,7 @@ Sentinel.prototype.addSlave = function(sentinelMsg){
 
 Sentinel.prototype.handleSentinelMessage = function (channel, msg) {
     if (!msg.match(this.getClusterName())) {
-        self.log('Got a message for a different cluster. My cluster: ' + this.getClusterName(), msg);
+        this.log('Got a message for a different cluster. My cluster: ' + this.getClusterName(), msg);
     }
 
     switch (channel) {
