@@ -322,9 +322,8 @@ Sentinel.prototype.initSentinel = function (endpoint, callback) {
         throw new Error('Sentinel endpoint " ' + endpoint + ' " is not valid');
     }
 
-    var tempSentinel = redis.createClient(endpoint.port, endpoint.host);
-    var tempPubSubRedis = redis.createClient(endpoint.port, endpoint.host);
-
+    var tempSentinel = this.createClient(endpoint);
+    var tempPubSubRedis = this.createClient(endpoint);
     tempPubSubRedis.send_command('subscribe', ['+sdown'], handleSubMessage);
     tempPubSubRedis.send_command('subscribe', ['-sdown'], handleSubMessage);
     tempPubSubRedis.send_command('subscribe', ['+slave'], handleSubMessage);
