@@ -282,8 +282,8 @@ Sentinel.prototype.handleSlaveUp = function (sentinelMsg) {
         var switchedSlave = false;
 
         for(var i in slaveClients){
-            
-            if (this.isSlave(slaveClients[i].host, slaveClients[i].port)){
+
+            if (this.isSlave(slaveClients[i].connectionOption.host, slaveClients[i].connectionOption.port)){
                 this.log('Got notified slave is up. We\'re allready using a slave');
             } else {
                 switchedSlave = true;
