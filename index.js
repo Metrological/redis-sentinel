@@ -251,7 +251,7 @@ Sentinel.prototype.handleSlaveDown = function (sentinelMsg) {
         var host = this.getNextSlaveHost();
         var switchedSlave = false;
         for(var i in slaves){
-            if (slaves[i].host != hostDown.host || slaves[i].port != hostDown.port){
+            if (slaves[i].connectionOption.host != hostDown.host || slaves[i].connectionOption.port != hostDown.port){
                 this.log('Got notified slave is down. We\'re not using that slave. So ignoring message');
             } else {
                 switchedSlave = true;
@@ -280,7 +280,9 @@ Sentinel.prototype.handleSlaveUp = function (sentinelMsg) {
 
         var slaveClients = this.getSlaveClients();
         var switchedSlave = false;
+
         for(var i in slaveClients){
+            
             if (this.isSlave(slaveClients[i].host, slaveClients[i].port)){
                 this.log('Got notified slave is up. We\'re allready using a slave');
             } else {
