@@ -20,7 +20,7 @@ function Sentinel(name, endpoints, options) {
     var masterAddress = {};
     var slaveEndpoints = [];
     var sentinels = [];
-    var activeSentinel = null;
+    var sentinelPubSubs = [];
     var masterClients = {};
     var slaveClients = {};
 
@@ -174,6 +174,10 @@ function Sentinel(name, endpoints, options) {
 
     this.getSentinels = function(){
         return sentinels;
+    };
+
+    this.getSentinelPubSubs = function(){
+        return sentinelPubSubs;
     };
 
     this.setActiveSentinel = function(s){
@@ -333,7 +337,9 @@ Sentinel.prototype.initSentinel = function (endpoint, callback) {
     tempPubSubRedis.on('message', this.handleSentinelMessage.bind(this));
 
     this.getSentinels().push(tempSentinel);
+    this.getSentinelPubSubs().push(tempPubSubRedis);
     this.setActiveSentinel(tempSentinel);
+
     if (typeof callback == 'function')
         callback();
 };
@@ -391,6 +397,33 @@ Sentinel.prototype.getNextSlaveHost = function(){
         host: this.getMasterHost(),
         port: this.getMasterPort()
     };
+};
+
+Sentinel.prototype.quit = function() {
+    // Quit all individual Redis clients.
+
+    var i;
+
+    var sentinels = this.getSentinels();
+    for (i = 0; i < sentinels.length; i++) {
+        sentinels[i].quit();
+    }
+
+    var sentinelPubSubs = this.getSentinelPubSubs();
+    for (i = 0; i < sentinelPubSubs.length; i++) {
+        sentinelPubSubs[i].quit();
+    }
+
+    var masterClients = this.getMasterClients();
+    for (i in masterClients) {
+        masterClients[i].quit();
+    }
+
+    var slaveClients = this.getSlaveClients();
+    for (i in slaveClients) {
+        slaveClients[i].quit();
+    }
+
 };
 
 module.exports = Sentinel;
