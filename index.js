@@ -19,6 +19,7 @@ function Sentinel(name, endpoints, options) {
     var self = this;
     var masterAddress = {};
     var slaveEndpoints = [];
+    var activeSentinel;
     var sentinels = [];
     var sentinelPubSubs = [];
     var masterClients = {};
@@ -159,8 +160,13 @@ function Sentinel(name, endpoints, options) {
             throw new Error('Slaves not enabled. Set option useSlave: true');
 
         if (!slaveClients[id])
-            slaveClients[id] = this.createClient(this.getNextSlaveHost());
+            return this.setSlaveByEndpoint(id, this.getNextSlaveHost());
 
+        return slaveClients[id];
+    };
+
+    this.setSlaveByEndpoint = function(id, endpoint){
+        slaveClients[id] = this.createClient(endpoint);
         return slaveClients[id];
     };
 
