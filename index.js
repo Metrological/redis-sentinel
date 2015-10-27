@@ -446,7 +446,7 @@ function getIpAndPortForSlave(sentinelResult) {
 
     obj.port = sentinelResult[portIndex + 1];
     obj.host = sentinelResult[ipIndex + 1];
-    obj.disconnected = sentinelResult[9].match('disconnected') ? true : false;
+    obj.disconnected = (sentinelResult[9].match('disconnected') || sentinelResult[9].match('s_down')) ? true : false ;
     return obj;
 }
 
