@@ -203,12 +203,12 @@ function Sentinel(name, endpoints, options) {
 
 }
 
-Sentinel.prototype.createClient = function (redisObj) {
+Sentinel.prototype.createClient = function (redisObj, overruleOptions) {
     var self = this;
     if (!redisObj.port || !redisObj.host)
         throw new Error('createClient requires object with host and port');
 
-    var temp = redis.createClient(redisObj.port, redisObj.host, this.getRedisConnectionOptions());
+    var temp = redis.createClient(redisObj.port, redisObj.host, overruleOptions || this.getRedisConnectionOptions());
     temp.on('reconnecting', function (err, res) {
         self.log(redisObj.port, redisObj.host, ' is reconnecting');
     });
