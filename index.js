@@ -138,12 +138,12 @@ function Sentinel(name, endpoints, options) {
         return masterClients;
     };
 
-    this.getMasterClientById = function(id){
+    this.getMasterClientById = function(id, overruleOptions){
         if (!id)
             throw new Error('id is required to get a slave client');
 
         if(!masterClients[id])
-            masterClients[id] = this.createClient(masterAddress);
+            masterClients[id] = this.createClient(masterAddress, overruleOptions);
 
         return masterClients[id];
     };
@@ -165,8 +165,8 @@ function Sentinel(name, endpoints, options) {
         return slaveClients[id];
     };
 
-    this.setSlaveByEndpoint = function(id, endpoint){
-        slaveClients[id] = this.createClient(endpoint);
+    this.setSlaveByEndpoint = function(id, endpoint, overruleOptions){
+        slaveClients[id] = this.createClient(endpoint, overruleOptions);
         return slaveClients[id];
     };
 
