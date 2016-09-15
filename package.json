@@ -1,6 +1,6 @@
 {
   "name": "simple-redis-sentinel",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Manage redis connections via redis sentinels",
   "author": "Wouter Meek <woutermeek@gmail.com>",
   "repository": {
