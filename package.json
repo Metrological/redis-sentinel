@@ -1,19 +1,26 @@
 {
   "name": "simple-redis-sentinel",
-  "version": "0.0.17",
+  "version": "1.0.0",
   "description": "Manage redis connections via redis sentinels",
-  "author": "Wouter Meek <woutermeek@gmail.com>",
+  "author": "Wouter Meek <woutermeek@gmail.com>, Bas van Meurs <b.van.meurs@metrological.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/Metrological/redis-sentinel.git"
   },
   "dependencies": {
     "async": "^0.9.0",
-    "redis": "^0.12.1"
+    "redis": "2.6.3",
+    "lodash": "~4.16.6"
   },
   "license": "MIT",
+  "main": "./lib/redis-sentinel",
   "keywords": [
     "redis",
     "sentinel"
-  ]
+  ],
+  "devDependencies": {
+    "async": "*",
+    "mocha": "*",
+    "should": "*"
+  }
 }
