@@ -106,7 +106,8 @@ sentinel.init(function(err) {
         console.log('READ RECEIVE  : ' + ago(lastChannelUp));
         console.log('SENTINEL 1    : ' + sentinel.getSentinels()[0].address, sentinel.getSentinels()[0].connected);
         console.log('SENTINEL 2    : ' + sentinel.getSentinels()[1].address, sentinel.getSentinels()[1].connected);
-        console.log('SENTINEL ACTIV: ' + sentinel.getActiveSentinel().address);
+        var activeSentinel = sentinel.getActiveSentinel();
+        console.log('SENTINEL ACTIV: ' + (activeSentinel ? activeSentinel.address : '-'));
     }, 5000);
 
 });

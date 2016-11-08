@@ -166,7 +166,7 @@ describe('redis-sentinel module', function() {
 
     describe('force master change', function() {
         after(function(done) {
-            setTimeout(done, 8000)
+            setTimeout(done, 8000);
         });
 
         it('pause master client should force failover', function(done) {
