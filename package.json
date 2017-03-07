@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "redis": "git+ssh://git@github.com:Metrological/node_redis.git",
+    "redis": "*",
     "lodash": "~4.16.6"
   },
   "license": "MIT",
